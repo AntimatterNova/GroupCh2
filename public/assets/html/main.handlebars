@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+</body>
+</html>
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script id="movie-list" type="text/x-handlebars-template">
+<ul class="movie-list">
+  {{#each movie}}
+    <div class="movie-entry">
+      <p>Title: {{this.titleText.text}}</p>
+      <img src="{{this.primaryImage.url}}" />
+      <p>Ratings: probably good idk</p>
+      <p>Description: {{this.id}}</p>
+    </div>
+  {{/each}}
+</ul>
+</script>
+
+<script>
+var source = document.getElementById("movie-list").innerHTML;
+var template = Handlebars.compile(source);
+
+const options = {
+  method: 'GET',
+  url: 'https://moviesdatabase.p.rapidapi.com/titles/random',
+  params: {
+    list: 'most_pop_movies'
+  },
+  headers: {
+    'X-RapidAPI-Key': '455a4bf363msh2b73fbc2a5bff09p1da02cjsn23933b8857b8',
+    'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+  }
+};
+
+axios.request(options).then((data) => {
+  console.log(data.data.results);
+  var context = {
+    movie: data.data.results
+  };
+  var html = template(context);
+  document.body.innerHTML = html
+})
+
+</script>
