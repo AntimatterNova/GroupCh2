@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  <body>
+</html>
+
+<!-- Include Handlebars from a CDN -->
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script id="movie-list" type="text/x-handlebars-template">
+
+   <div class="container">
+            <h1 class="title">Cinematrix</h1>
+            <h2 class="subtitle">Find Your Next Movie</h2>
+            </div>
+        
+
+        <div class="field has-addons">
+              <p class="control">
+                <input class="input" type="text" placeholder="Find a movie">
+              </p>
+              <p class="control">
+                <button class="button">
+                  Search
+                </button>
+                </p>
+                </div>
+
+                <div class="field has-addons">
+                <div class="buttons">
+          <a class="button is-primary">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light">
+            Log in
+          </a>
+        </div>
+     </div>
+  
+
+    
+  <div class="columns is-vcenter">
+    <div class="columns is-multiline is-mobile">
+      <div class="column is-8">
+               <figure class="image is-128x128">
+              <img src="{{this.primaryImage.url}}" alt="Image">
+            </figure>
+            </div>
+            </div>
+            </div>
+
+
+      <div class="section is-medium"
+       <div class="columns is-multiline is-mobile">
+          <div class="column">
+            {{this.titleText.text}}
+      </div>
+      </div>
+        </div>
+
+
+        <div class="columns">
+            <div class="column">
+          <div class="movie-entry">
+            <p class="has-text-black">
+              Title:
+              {{this.titleText.text}}
+            </p>
+          </div>
+        </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+      <ul class="movie-list">
+        {{#each movie}}
+        </ul>
+  </div>
+  </div>
+
+        
+            <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+            <div class="column">
+            <p class="has-text-black">
+              Ratings: probably good idk
+            </p>
+            </div>
+            </div>
+
+            <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+            <div class="column">
+            <p class="has-text-black">
+              Description:
+              {{this.id}}</p>
+          </div>
+        </div>
+    {{/each}}
+</script>
+
+
+    <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+      <div class="columns">
+            <div class="column">
+          <div class="movie-entry">
+            <p class="has-text-black">
+              Title:
+              {{this.titleText.text}}
+            </p>
+          </div>
+        </div>
+        </div>
+        </div>
+
+            <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+            <div class="column">
+            <p class="has-text-black">
+              Ratings: probably good idk
+            </p>
+            <p class="has-text-black">
+              Description:
+              {{this.id}}</p>
+          </div>
+        </div> 
+    {{/each}}
+</script>
+
+        <!--<nav>
+        <div class="columns">
+            <div class="column">
+        <figure class="image is-128x128">
+              <img src="{{this.primaryImage.url}}" alt="Image">
+            </figure>
+            </div>
+            </nav>-->
+
+
+
+   
+
+<script>
+  var source = document.getElementById("movie-list").innerHTML;
+  var template = Handlebars.compile(source);
+  const options = {
+    method: "GET",
+    url: "https://moviesdatabase.p.rapidapi.com/titles/random",
+    params: { list: "most_pop_movies" },
+    headers: {
+      "X-RapidAPI-Key": "455a4bf363msh2b73fbc2a5bff09p1da02cjsn23933b8857b8",
+      "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
+    },
+  };
+  axios.request(options).then((data) => {
+    console.log(data.data.results);
+    var context = { movie: data.data.results };
+    var html = template(context);
+    document.body.innerHTML = html;
+  });
+</script>
+</body>
+
+
