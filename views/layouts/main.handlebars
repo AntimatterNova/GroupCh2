@@ -3,11 +3,12 @@
 <head>
 </head>
 <body>
+  {{{ body }}}
 </body>
 </html>
 
 <!-- Include Handlebars from a CDN -->
-<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 <script id="movie-list" type="text/x-handlebars-template">
 <ul class="movie-list">
@@ -20,9 +21,9 @@
     </div>
   {{/each}}
 </ul>
-</script>
+</script> --}}
 
-<script>
+{{!-- <script>
 var source = document.getElementById("movie-list").innerHTML;
 var template = Handlebars.compile(source);
 
@@ -47,4 +48,4 @@ axios.request(options).then((data) => {
   document.body.innerHTML = html
 })
 
-</script>
+</script> --}}
