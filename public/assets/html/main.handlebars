@@ -79,13 +79,15 @@
   is-light"> Log in </a> </div> </div> </div> </div> </div> <ul
   class="movie-list columns">
   {{#each movie}}
-    <div class="column"> <div class="movie-entry"> <p>Title:
+    <section class="section"> <div class="container"> <div class="columns
+    is-multiline has-background-dark p"> <div class="column"> <div
+    class="movie-entry"> <p>Title:
     {{this.titleText.text}}</p> <img src="{{this.primaryImage.url}}" />
     <p>Ratings: probably good idk</p> <p>Description:
     {{this.id}}</p> </div> <div class="movie-entry"> <p>Title:
     {{this.titleText.text}}</p> <img src="{{this.primaryImage.url}}" />
     <p>Ratings: probably good idk</p> <p>Description:
-    {{this.id}}</p> </div>
+    {{this.id}}</p> </div> </div> </div> </div> </section>
 
   {{/each}}
   </ul>
